@@ -20,6 +20,7 @@ import java.util.Map;
 
 import jakarta.validation.Valid;
 
+import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.samples.petclinic.visit.VisitRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +38,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author Michael Isvy
  */
 @Controller
+@RegisterReflectionForBinding(Owner.class)
 class OwnerController {
 
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
@@ -44,8 +46,8 @@ class OwnerController {
 	private final OwnerRepository owners;
 	private final VisitRepository visits;
 
-	public OwnerController(OwnerRepository clinicService, VisitRepository visits) {
-		this.owners = clinicService;
+	public OwnerController(OwnerRepository owners, VisitRepository visits) {
+		this.owners = owners;
 		this.visits = visits;
 	}
 
